@@ -1,0 +1,33 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+apply plugin: 'war'
+war {
+    archiveName 'test1.war'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//JSONを使えるように下記を追加した
+	implementation 'com.google.code.gson:gson'
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
